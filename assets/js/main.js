@@ -23,18 +23,34 @@
     else window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY + offset, behavior: reduced ? 'auto' : 'smooth' });
   }
 
-  // vidinės nuorodos (#…) – per Lenis
+  // „/“ ir „/index.html“ – tas pats puslapis (GitHub Pages ir vietinis serveris)
+  const samePath = (a, b) => a.replace(/index\.html$/, '') === b.replace(/index\.html$/, '');
+
+  // vidinės nuorodos – sklandžiai, be puslapio perkrovimo
   document.addEventListener('click', (e) => {
-    const a = e.target.closest('a[href*="#"]');
-    if (!a) return;
+    const a = e.target.closest('a[href]');
+    if (!a || a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey) return;
     const url = new URL(a.href, location.href);
-    if (url.pathname !== location.pathname || !url.hash) return;
-    const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
-    if (!target) return;
+    if (url.origin !== location.origin || !samePath(url.pathname, location.pathname)) return;
     e.preventDefault();
     closeMenu();
-    scrollToEl(target);
+    if (!url.hash) { // logotipas tame pačiame puslapyje – į viršų
+      if (lenis) lenis.scrollTo(0); else window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+      history.replaceState(null, '', url.pathname);
+      return;
+    }
+    const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    if (!target) return;
+    scrollToEl(target, target.id === 'turinys' ? 0 : -90);
     history.replaceState(null, '', url.hash);
+    if (target.id === 'turinys') target.focus({ preventScroll: true });
+  });
+
+  // atėjus iš kito puslapio su #inkaru – patikslinti poziciją, kai viskas įsikėlė
+  window.addEventListener('load', () => {
+    if (!location.hash) return;
+    const t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (t) setTimeout(() => scrollToEl(t), 60);
   });
 
   /* ---------- antraštė ---------- */
@@ -63,6 +79,7 @@
     document.body.classList.add('menu-open');
     header.classList.remove('is-hidden');
     if (lenis) lenis.stop();
+    setTimeout(() => { const f = $('a', menu); if (f) f.focus(); }, 60);
   }
   function closeMenu() {
     if (!menu || menu.hidden) return;
@@ -72,9 +89,20 @@
     document.body.classList.remove('menu-open');
     if (lenis) lenis.start();
     setTimeout(() => { menu.hidden = true; }, 400);
+    if (menu.contains(document.activeElement)) burger.focus();
   }
   burger && burger.addEventListener('click', () => (menu.hidden ? openMenu() : closeMenu()));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+  document.addEventListener('keydown', (e) => {
+    if (!menu || menu.hidden) return;
+    if (e.key === 'Escape') closeMenu();
+    if (e.key === 'Tab') { // fokusas lieka meniu viduje
+      const items = [burger, ...$$('a', menu)];
+      const i = items.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0) { e.preventDefault(); items[items.length - 1].focus(); }
+      else if (!e.shiftKey && i === items.length - 1) { e.preventDefault(); items[0].focus(); }
+    }
+  });
+  window.addEventListener('resize', () => { if (window.innerWidth > 1140) closeMenu(); });
 
   /* ---------- skaidomos antraštės (Salient: Split Line Heading) ---------- */
   $$('[data-split]').forEach((el) => {
@@ -147,6 +175,21 @@
     if (heroMedia && window.scrollY < vh * 1.2) heroMedia.style.translate = `0 ${(window.scrollY * 0.28).toFixed(1)}px`;
   }
 
+  /* ---------- aktyvus meniu punktas pagal sekciją ---------- */
+  const spyLinks = $$('.main-nav a[href*="#"]').filter((a) => samePath(new URL(a.href, location.href).pathname, location.pathname));
+  const spyTargets = spyLinks.map((a) => document.getElementById(a.hash.slice(1))).filter(Boolean);
+  function scrollSpy() {
+    if (!spyTargets.length) return;
+    const line = window.innerHeight * 0.35;
+    let current = null;
+    spyTargets.forEach((t) => { if (t.getBoundingClientRect().top <= line) current = t; });
+    if (current && current.getBoundingClientRect().bottom < line) current = null;
+    spyLinks.forEach((a) => {
+      if (current && a.hash === '#' + current.id) a.setAttribute('aria-current', 'location');
+      else a.removeAttribute('aria-current');
+    });
+  }
+
   /* ---------- slinkimo ciklas ---------- */
   let ticking = false;
   function onScroll() {
@@ -154,6 +197,7 @@
     ticking = true;
     requestAnimationFrame(() => {
       onHeaderScroll();
+      scrollSpy();
       parallax();
       updateMobileBook();
       ticking = false;
@@ -168,16 +212,28 @@
     heroVideo.src = window.innerWidth < 768 ? heroVideo.dataset.srcSmall : heroVideo.dataset.srcLarge;
     heroVideo.play().catch(() => {});
   }
+  const userPaused = new Set();
   $$('[data-lazy-video]').forEach((v) => {
     if (reduced || saveData) return;
     const vio = new IntersectionObserver(([en]) => {
       if (en.isIntersecting) {
         const s = v.querySelector('source[data-src]');
         if (s) { s.src = s.dataset.src; s.removeAttribute('data-src'); v.load(); }
-        v.play().catch(() => {});
+        if (!userPaused.has(v)) v.play().catch(() => {});
       } else v.pause();
     }, { threshold: 0.25 });
     vio.observe(v);
+  });
+  // stabdymo / paleidimo mygtukai (WCAG 2.2.2)
+  $$('[data-video-toggle]').forEach((btn) => {
+    const v = $(`#video-${btn.dataset.videoToggle}`);
+    if (!v || reduced || saveData) { btn.hidden = true; return; }
+    btn.addEventListener('click', () => {
+      const pause = !userPaused.has(v);
+      if (pause) { userPaused.add(v); v.pause(); } else { userPaused.delete(v); v.play().catch(() => {}); }
+      btn.setAttribute('aria-pressed', String(pause));
+      btn.setAttribute('aria-label', pause ? 'Paleisti vaizdo įrašą' : 'Sustabdyti vaizdo įrašą');
+    });
   });
 
   /* ---------- patogumai: sąrašas + keičiamas paveikslas ---------- */
@@ -228,7 +284,7 @@
     if (moreBtn) moreBtn.parentElement.hidden = galleryFilter !== 'all' || showAll;
   }
   $$('[data-filters] button').forEach((b) => b.addEventListener('click', () => {
-    $$('[data-filters] button').forEach((x) => x.classList.toggle('is-active', x === b));
+    $$('[data-filters] button').forEach((x) => { x.classList.toggle('is-active', x === b); x.setAttribute('aria-pressed', String(x === b)); });
     galleryFilter = b.dataset.filter;
     applyGallery();
   }));
@@ -240,14 +296,17 @@
   const lbCap = $('[data-lb-caption]');
   let lbItems = [];
   let lbIndex = 0;
+  let lbOpener = null;
   function lbShow(i) {
     lbIndex = (i + lbItems.length) % lbItems.length;
     const a = lbItems[lbIndex];
     lbImg.src = a.getAttribute('href');
     lbImg.alt = a.dataset.caption || '';
     lbCap.textContent = `${a.dataset.caption || ''}  ·  ${lbIndex + 1} / ${lbItems.length}`;
+    [lbIndex + 1, lbIndex - 1].forEach((n) => { const x = lbItems[(n + lbItems.length) % lbItems.length]; if (x) new Image().src = x.getAttribute('href'); });
   }
   function lbOpen(a) {
+    lbOpener = a;
     lbItems = $$('[data-lightbox]').filter((x) => !x.closest('[hidden]'));
     lb.hidden = false;
     requestAnimationFrame(() => lb.classList.add('is-open'));
@@ -261,6 +320,7 @@
     if (lenis) lenis.start();
     document.body.style.overflow = '';
     setTimeout(() => { lb.hidden = true; lbImg.removeAttribute('src'); }, 350);
+    if (lbOpener) lbOpener.focus({ preventScroll: true });
   }
   if (lb) {
     document.addEventListener('click', (e) => {
@@ -278,6 +338,12 @@
       if (e.key === 'Escape') lbClose();
       if (e.key === 'ArrowLeft') lbShow(lbIndex - 1);
       if (e.key === 'ArrowRight') lbShow(lbIndex + 1);
+      if (e.key === 'Tab') { // fokusas lieka peržiūroje
+        const f = $$('button', lb);
+        const i = f.indexOf(document.activeElement);
+        e.preventDefault();
+        f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+      }
     });
     let sx = null;
     lb.addEventListener('pointerdown', (e) => { sx = e.clientX; });
@@ -299,9 +365,28 @@
     p.appendChild(label);
     const open = () => panels.forEach((x) => x.classList.toggle('is-open', x === p));
     p.addEventListener('mouseenter', () => window.matchMedia('(min-width: 900px)').matches && open());
-    p.addEventListener('focus', open);
+    p.addEventListener('focusin', open);
     p.addEventListener('click', open);
   });
+
+  /* ---------- pranešimas ---------- */
+  const toast = $('[data-toast]');
+  let toastTimer = null;
+  function showToast(text) {
+    if (!toast) return;
+    $('[data-toast-text]', toast).textContent = text;
+    toast.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 4500);
+  }
+  if (toast) {
+    $('[data-toast-action]', toast).addEventListener('click', () => {
+      toast.classList.remove('is-visible');
+      scrollToEl($('#kainos'));
+    });
+    toast.addEventListener('mouseenter', () => clearTimeout(toastTimer));
+    toast.addEventListener('mouseleave', () => { toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2500); });
+  }
 
   /* ---------- kainų skaičiuoklė ---------- */
   const booker = $('[data-booker]');
@@ -345,6 +430,8 @@
     const totalEl = $('[data-total]', booker);
     const toForm = $('[data-to-form]', booker);
     const extras = $$('[data-extra]', booker);
+    const clearBtn = $('[data-cal-clear]', booker);
+    const hint = $('[data-booker-hint]', booker);
 
     const monthCount = () => (booker.clientWidth >= 560 ? 2 : 1);
 
@@ -436,6 +523,11 @@
       }
       totalEl.textContent = nights ? `${from ? 'nuo ' : ''}${eur(total)}` : '–';
       toForm.disabled = !nights;
+      clearBtn.hidden = !state.start;
+      hint.textContent = nights
+        ? 'Užimtumą patvirtinsime atsakydami į užklausą.'
+        : (state.start ? 'Dabar pažymėkite išvykimo dieną.' : 'Pirmiausia kalendoriuje pažymėkite atvykimo ir išvykimo dienas.');
+      syncExtraButtons();
     }
 
     monthsEl.addEventListener('click', (e) => {
@@ -448,6 +540,16 @@
       else { state.end = date; }
       update();
     });
+    // pasirinkus atvykimą – rodoma būsimo intervalo peržiūra
+    monthsEl.addEventListener('mouseover', (e) => {
+      const b = e.target.closest('.cal__day');
+      if (!state.start || state.end) return;
+      const hov = b && !b.disabled ? b.dataset.date : null;
+      const s0 = iso(state.start);
+      $$('.cal__day', monthsEl).forEach((d) => d.classList.toggle('in-preview', !!hov && d.dataset.date > s0 && d.dataset.date <= hov));
+    });
+    monthsEl.addEventListener('mouseleave', () => $$('.in-preview', monthsEl).forEach((d) => d.classList.remove('in-preview')));
+    clearBtn.addEventListener('click', () => { state.start = null; state.end = null; update(); $('.cal__day:not(:disabled)', monthsEl).focus(); });
     prevBtn.addEventListener('click', () => { state.view.setMonth(state.view.getMonth() - 1); update(); });
     nextBtn.addEventListener('click', () => { state.view.setMonth(state.view.getMonth() + 1); update(); });
     $$('[data-step]', booker).forEach((b) => b.addEventListener('click', () => {
@@ -458,11 +560,24 @@
     let rw = booker.clientWidth;
     window.addEventListener('resize', () => { if (Math.abs(booker.clientWidth - rw) > 20) { rw = booker.clientWidth; renderCal(); } });
 
-    // „Pridėti prie užklausos“ iš ofūro sekcijos
-    $$('[data-add-extra]').forEach((b) => b.addEventListener('click', () => {
+    // „Pridėti prie užklausos“ iš pramogų ir ofūro sekcijų (perjungiamas)
+    const addBtns = $$('[data-add-extra]');
+    function syncExtraButtons() {
+      addBtns.forEach((b) => {
+        const box = extras.find((x) => x.value === b.dataset.addExtra);
+        const on = !!(box && box.checked);
+        b.setAttribute('aria-pressed', String(on));
+        b.textContent = on ? 'Pridėta prie užklausos' : 'Pridėti prie užklausos';
+      });
+    }
+    addBtns.forEach((b) => b.addEventListener('click', (e) => {
+      e.stopPropagation();
       const box = extras.find((x) => x.value === b.dataset.addExtra);
-      if (box) { box.checked = true; update(); }
-      scrollToEl($('#kainos'));
+      if (!box) return;
+      box.checked = !box.checked;
+      update();
+      const name = EXTRA_NAMES[box.value].split(',')[0];
+      showToast(box.checked ? `Pridėta prie užklausos: ${name}` : `Pašalinta iš užklausos: ${name}`);
     }));
 
     // perkelti į kontaktų formą
@@ -496,16 +611,31 @@
 
   /* ---------- demo forma (nesiunčiama) ---------- */
   $$('[data-demo-form]').forEach((form) => {
+    // klaida dingsta, kai lauką pataisote
+    $$('input[required]', form).forEach((inp) => inp.addEventListener('input', () => {
+      if (inp.getAttribute('aria-invalid') !== 'true') return;
+      const err = $(`#${inp.getAttribute('aria-describedby')}`, form);
+      inp.closest('.field').classList.remove('is-invalid');
+      inp.setAttribute('aria-invalid', 'false');
+      if (err) err.textContent = '';
+    }));
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       let ok = true;
       $$('input[required]', form).forEach((inp) => {
-        const bad = !inp.value.trim() || (inp.type === 'email' && !/^\S+@\S+\.\S+$/.test(inp.value));
-        inp.closest('.field').classList.toggle('is-invalid', bad);
-        if (bad && ok) { inp.focus(); ok = false; }
+        const empty = !inp.value.trim();
+        const badMail = inp.type === 'email' && !empty && !/^\S+@\S+\.\S+$/.test(inp.value.trim());
+        const msg = empty ? (inp.type === 'email' ? 'Įrašykite el. pašto adresą.' : 'Įrašykite savo vardą.') : (badMail ? 'Patikrinkite el. pašto adresą, pvz. vardas@pastas.lt.' : '');
+        const err = $(`#${inp.getAttribute('aria-describedby')}`, form);
+        inp.closest('.field').classList.toggle('is-invalid', !!msg);
+        inp.setAttribute('aria-invalid', String(!!msg));
+        if (err) err.textContent = msg;
+        if (msg && ok) { inp.focus(); ok = false; }
       });
       if (!ok) return;
-      $('[data-form-thanks]', form).hidden = false;
+      const thanks = $('[data-form-thanks]', form);
+      thanks.hidden = false;
+      thanks.focus();
       form.reset();
     });
   });
@@ -521,5 +651,9 @@
     mobileBook.classList.toggle('is-visible', past && !inZone);
   }
 
-  onScroll();
+  // pradinė būsena – iškart, nelaukiant slinkimo (pvz. atėjus su #inkaru)
+  function syncAll() { onHeaderScroll(); scrollSpy(); parallax(); updateMobileBook(); }
+  syncAll();
+  window.addEventListener('load', syncAll);
+  window.addEventListener('pageshow', syncAll);
 })();

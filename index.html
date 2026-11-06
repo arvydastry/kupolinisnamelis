@@ -7,10 +7,19 @@
   <meta name="description" content="40 m² kupolinis namelis miško apsuptyje prie Dubysos: ąžuolinė terasa, ofūro vonia, pirtis, baidarės. Poilsis porai ar šeimai iki 4 asmenų, nuo 100 € už naktį.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#F4EFE6">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="lt_LT">
+  <meta property="og:site_name" content="Kupolinis namelis">
+  <meta property="og:title" content="Kupolinis namelis | Poilsis dviems Dubysos slėnyje, Kauno r.">
+  <meta property="og:description" content="40 m² kupolinis namelis miško apsuptyje prie Dubysos: ąžuolinė terasa, ofūro vonia, pirtis, baidarės. Poilsis porai ar šeimai iki 4 asmenų, nuo 100 € už naktį.">
+  <meta property="og:image" content="https://arvydastry.github.io/kupolinisnamelis/assets/img/og-kupolinis-namelis.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 30'%3E%3Cpath d='M2 27 L5 16 L13 8 L24 5 L35 8 L43 16 L46 27 Z' fill='%23F4EFE6' stroke='%232D3A2C' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/Newsreader.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/Figtree.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=541ac47c">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body data-page="pradzia">
@@ -61,22 +70,24 @@
       <a href="index.html#kontaktai">Kontaktai</a>
     </nav>
     <div class="mobile-menu__foot">
+      <a class="btn btn--clay" href="index.html#kainos">Pasitikrinti kainą ir rezervuoti</a>
       <a href="tel:+37068749385">+370 687 49385</a>
       <a href="mailto:kupolinisnamelis@gmail.com">kupolinisnamelis@gmail.com</a>
     </div>
   </div>
 
-  <main id="turinys">
+  <main id="turinys" tabindex="-1">
     <!-- ============ HERO ============
          Salient: Row → Background Video (mp4 + poster), Full Height Row, Text Color Light,
          Overlay Gradient; antraštė – „Split Line Heading“ (Animation: Line Reveal by Space);
          apačioje Shape Divider „Curve“ (Shape Divider Position: Bottom) -->
     <section class="hero" data-hero>
       <div class="hero__media">
-        <video class="hero__video" autoplay muted loop playsinline preload="metadata" poster="assets/img/poster-rukas.jpg" data-hero-video
+        <video class="hero__video" id="video-hero" autoplay muted loop playsinline preload="metadata" poster="assets/img/poster-rukas.jpg" data-hero-video
                data-src-small="assets/video/rukas-slenyje-960.mp4" data-src-large="assets/video/rukas-slenyje-1280.mp4"></video>
         <div class="hero__shade"></div>
       </div>
+      <button type="button" class="video-toggle" data-video-toggle="hero" aria-pressed="false" aria-label="Sustabdyti fono vaizdo įrašą"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" rx="1"/><rect x="9.5" y="2" width="3.5" height="12" rx="1"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11a.6.6 0 0 0 .9.5l9-5.5a.6.6 0 0 0 0-1l-9-5.5a.6.6 0 0 0-.9.5z"/></svg></button>
 
       <div class="container hero__content">
         <p class="eyebrow eyebrow--light reveal">Kupolinis namelis prie Dubysos · Kauno r.</p>
@@ -118,7 +129,7 @@
             <img src="assets/img/kupolas-vidus.jpg" width="2000" height="1500" alt="Šviesus kupolo vidus su antresole, laiptais ir virtuvėle" loading="lazy" data-parallax="-0.06">
           </figure>
           <figure class="intro__small mask-reveal" style="--d:.25s" data-parallax-wrap="0.08">
-            <img src="assets/img/kavos-kampelis.jpg" width="1500" height="1001" alt="Kavos kampelis su Dolce Gusto aparatu ir arbatžolėmis" loading="lazy">
+            <img src="assets/img/sm/kavos-kampelis.jpg" srcset="assets/img/sm/kavos-kampelis.jpg 800w, assets/img/kavos-kampelis.jpg 1500w" sizes="(max-width: 960px) 46vw, 20vw" width="1500" height="1001" alt="Kavos kampelis su Dolce Gusto aparatu ir arbatžolėmis" loading="lazy">
           </figure>
         </div>
       </div>
@@ -168,15 +179,15 @@
                 <span class="amenity__title">Virtuvė</span>
               </button>
               <p class="amenity__text">Virtuvėlėje rasite būtiniausius maisto gaminimo reikmenis ir įrangą, taip pat kavos aparatą „Dolce Gusto“. Namelyje yra skanus geriamas vanduo.</p>
-              <img class="amenity__thumb" src="assets/img/virtuve-laiptai.jpg" alt="" loading="lazy">
+              <img class="amenity__thumb" src="assets/img/sm/virtuve-laiptai.jpg" alt="" loading="lazy">
             </li>
             <li class="amenity" data-img="assets/img/terasa-vasara.jpg" data-alt="Ąžuolinė terasa virš miškingo slėnio">
               <button type="button" class="amenity__btn">
                 <span class="amenity__no">02</span>
                 <span class="amenity__title">Terasa</span>
               </button>
-              <p class="amenity__text">16 m² ąžuolinė terasa. Iš jos atsiveria vaizdas į miškingą upės slėnį – čia galėsite pasimėgauti rytine kava ar arbata (abi rasite namelyje nemokamai).</p>
-              <img class="amenity__thumb" src="assets/img/terasa-vasara.jpg" alt="" loading="lazy">
+              <p class="amenity__text">16 m² ąžuolinė terasa. Iš jos atsiveria vaizdas į miškingą upės slėnį – čia galėsite pasimėgauti rytine kava ar arbata – jas rasite namelyje nemokamai.</p>
+              <img class="amenity__thumb" src="assets/img/sm/terasa-vasara.jpg" alt="" loading="lazy">
             </li>
             <li class="amenity" data-img="assets/img/antresole-knygos.jpg" data-alt="Svetainės zona su televizoriumi ir knygų lentyna">
               <button type="button" class="amenity__btn">
@@ -184,7 +195,7 @@
                 <span class="amenity__title">Nemokamas Wi-Fi ir TV</span>
               </button>
               <p class="amenity__text">Belaidis internetas ir televizorius – nemokamai, visam viešnagės laikui.</p>
-              <img class="amenity__thumb" src="assets/img/antresole-knygos.jpg" alt="" loading="lazy">
+              <img class="amenity__thumb" src="assets/img/sm/antresole-knygos.jpg" alt="" loading="lazy">
             </li>
             <li class="amenity" data-img="assets/img/vonios-kambarys.jpg" data-alt="Vonios kambarys su chalatu ir rankšluosčiais">
               <button type="button" class="amenity__btn">
@@ -192,7 +203,7 @@
                 <span class="amenity__title">Vonios kambarys</span>
               </button>
               <p class="amenity__text">Rankšluosčiai, chalatai ir šlepetės, plaukų džiovintuvas, kepurės pirčiai.</p>
-              <img class="amenity__thumb" src="assets/img/vonios-kambarys.jpg" alt="" loading="lazy">
+              <img class="amenity__thumb" src="assets/img/sm/vonios-kambarys.jpg" alt="" loading="lazy">
             </li>
             <li class="amenity" data-img="assets/img/miegamasis.jpg" data-alt="Paruošta lova su švaria patalyne">
               <button type="button" class="amenity__btn">
@@ -200,7 +211,7 @@
                 <span class="amenity__title">Patalynė</span>
               </button>
               <p class="amenity__text">Švari patalynė jau paklota – atvažiuokite ir ilsėkitės.</p>
-              <img class="amenity__thumb" src="assets/img/miegamasis.jpg" alt="" loading="lazy">
+              <img class="amenity__thumb" src="assets/img/sm/miegamasis.jpg" alt="" loading="lazy">
             </li>
             <li class="amenity" data-img="assets/img/virtuve-stalas.jpg" data-alt="Šviesi namelio erdvė su kondicionieriumi">
               <button type="button" class="amenity__btn">
@@ -208,7 +219,7 @@
                 <span class="amenity__title">Šildymas ir vėdinimas</span>
               </button>
               <p class="amenity__text">Šildomos grindys, kondicionierius ir rekuperatorius (vėdinimo sistema) – jauku bet kuriuo metų laiku.</p>
-              <img class="amenity__thumb" src="assets/img/virtuve-stalas.jpg" alt="" loading="lazy">
+              <img class="amenity__thumb" src="assets/img/sm/virtuve-stalas.jpg" alt="" loading="lazy">
             </li>
             <li class="amenity" data-img="assets/img/terasa-ziema-2.jpg" data-alt="Terasa su lauko baldais">
               <button type="button" class="amenity__btn">
@@ -216,7 +227,7 @@
                 <span class="amenity__title">Grilius</span>
               </button>
               <p class="amenity__text">Terasoje rasite „Kamado“ pikniko grilių su anglimis ir įdegtukais.</p>
-              <img class="amenity__thumb" src="assets/img/terasa-ziema-2.jpg" alt="" loading="lazy">
+              <img class="amenity__thumb" src="assets/img/sm/terasa-ziema-2.jpg" alt="" loading="lazy">
             </li>
           </ol>
         </div>
@@ -235,10 +246,11 @@
     <section class="section section--tight morning">
       <div class="container">
         <div class="morning__frame reveal">
-          <video class="morning__video" muted loop playsinline preload="none" poster="assets/img/poster-kava.jpg" data-lazy-video>
+          <video class="morning__video" id="video-morning" muted loop playsinline preload="none" poster="assets/img/poster-kava.jpg" data-lazy-video>
             <source data-src="assets/video/rytine-kava-1366.mp4" type="video/mp4">
           </video>
           <div class="morning__shade"></div>
+          <button type="button" class="video-toggle" data-video-toggle="morning" aria-pressed="false" aria-label="Sustabdyti vaizdo įrašą"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" rx="1"/><rect x="9.5" y="2" width="3.5" height="12" rx="1"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11a.6.6 0 0 0 .9.5l9-5.5a.6.6 0 0 0 0-1l-9-5.5a.6.6 0 0 0-.9.5z"/></svg></button>
           <div class="morning__text">
             <p class="eyebrow eyebrow--light">Terasa</p>
             <p class="morning__quote split" data-split>Rytinė kava terasoje, kol slėnyje dar tvyro rūkas.</p>
@@ -259,174 +271,174 @@
             <h2 class="h2 split" data-split>Pažiūrėkite iš arčiau</h2>
           </div>
           <div class="filters reveal" role="group" aria-label="Galerijos filtras" data-filters>
-            <button type="button" class="is-active" data-filter="all">Visos</button>
-            <button type="button" data-filter="viduje">Viduje</button>
-            <button type="button" data-filter="lauke">Lauke</button>
-            <button type="button" data-filter="ziema">Žiemą</button>
+            <button type="button" class="is-active" aria-pressed="true" data-filter="all">Visos <small>26</small></button>
+            <button type="button" aria-pressed="false" data-filter="viduje">Viduje <small>17</small></button>
+            <button type="button" aria-pressed="false" data-filter="lauke">Lauke <small>4</small></button>
+            <button type="button" aria-pressed="false" data-filter="ziema">Žiemą <small>5</small></button>
           </div>
         </div>
 
         <div class="g-grid" data-gallery>
       <figure class="g-item" data-cat="viduje">
         <a href="assets/img/kupolas-vidus.jpg" data-lightbox data-caption="Kupolo vidus su antresole, virtuvėle ir miegamąja zona">
-          <img src="assets/img/kupolas-vidus.jpg" alt="Kupolo vidus su antresole, virtuvėle ir miegamąja zona" width="2000" height="1500" loading="lazy" decoding="async">
+          <img src="assets/img/sm/kupolas-vidus.jpg" srcset="assets/img/sm/kupolas-vidus.jpg 800w, assets/img/kupolas-vidus.jpg 2000w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="2000" height="1500" alt="Kupolo vidus su antresole, virtuvėle ir miegamąja zona" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item" data-cat="lauke">
         <a href="assets/img/terasa-vasara.jpg" data-lightbox data-caption="Ąžuolinė terasa su vaizdu į miškingą Dubysos slėnį">
-          <img src="assets/img/terasa-vasara.jpg" alt="Ąžuolinė terasa su vaizdu į miškingą Dubysos slėnį" width="1600" height="2000" loading="lazy" decoding="async">
+          <img src="assets/img/sm/terasa-vasara.jpg" srcset="assets/img/sm/terasa-vasara.jpg 800w, assets/img/terasa-vasara.jpg 1600w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1600" height="2000" alt="Ąžuolinė terasa su vaizdu į miškingą Dubysos slėnį" loading="lazy" decoding="async">
           <span class="g-tag">Lauke</span>
         </a>
       </figure>
       <figure class="g-item" data-cat="viduje">
         <a href="assets/img/miegamasis.jpg" data-lightbox data-caption="Miegamasis su natūralaus medžio kolonomis">
-          <img src="assets/img/miegamasis.jpg" alt="Miegamasis su natūralaus medžio kolonomis" width="1500" height="1001" loading="lazy" decoding="async">
+          <img src="assets/img/sm/miegamasis.jpg" srcset="assets/img/sm/miegamasis.jpg 800w, assets/img/miegamasis.jpg 1500w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1500" height="1001" alt="Miegamasis su natūralaus medžio kolonomis" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item" data-cat="lauke">
         <a href="assets/img/ofuro-nakti.jpg" data-lightbox data-caption="Ofūro vonia vakare, apšviesta žibintais">
-          <img src="assets/img/ofuro-nakti.jpg" alt="Ofūro vonia vakare, apšviesta žibintais" width="2000" height="1335" loading="lazy" decoding="async">
+          <img src="assets/img/sm/ofuro-nakti.jpg" srcset="assets/img/sm/ofuro-nakti.jpg 800w, assets/img/ofuro-nakti.jpg 2000w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="2000" height="1335" alt="Ofūro vonia vakare, apšviesta žibintais" loading="lazy" decoding="async">
           <span class="g-tag">Lauke</span>
         </a>
       </figure>
       <figure class="g-item" data-cat="viduje">
         <a href="assets/img/antresole-knygos.jpg" data-lightbox data-caption="Knygų lentyna ir laiptai į antresolę">
-          <img src="assets/img/antresole-knygos.jpg" alt="Knygų lentyna ir laiptai į antresolę" width="2000" height="1500" loading="lazy" decoding="async">
+          <img src="assets/img/sm/antresole-knygos.jpg" srcset="assets/img/sm/antresole-knygos.jpg 800w, assets/img/antresole-knygos.jpg 2000w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="2000" height="1500" alt="Knygų lentyna ir laiptai į antresolę" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item" data-cat="ziema">
         <a href="assets/img/kupolas-salna.jpg" data-lightbox data-caption="Kupolinis namelis šerkšnotą rytą">
-          <img src="assets/img/kupolas-salna.jpg" alt="Kupolinis namelis šerkšnotą rytą" width="2000" height="1500" loading="lazy" decoding="async">
+          <img src="assets/img/sm/kupolas-salna.jpg" srcset="assets/img/sm/kupolas-salna.jpg 800w, assets/img/kupolas-salna.jpg 2000w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="2000" height="1500" alt="Kupolinis namelis šerkšnotą rytą" loading="lazy" decoding="async">
           <span class="g-tag">Žiemą</span>
         </a>
       </figure>
       <figure class="g-item" data-cat="viduje">
         <a href="assets/img/virtuve-laiptai.jpg" data-lightbox data-caption="Virtuvėlė su plytų sienele ir laiptais į antresolę">
-          <img src="assets/img/virtuve-laiptai.jpg" alt="Virtuvėlė su plytų sienele ir laiptais į antresolę" width="1500" height="1001" loading="lazy" decoding="async">
+          <img src="assets/img/sm/virtuve-laiptai.jpg" srcset="assets/img/sm/virtuve-laiptai.jpg 800w, assets/img/virtuve-laiptai.jpg 1500w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1500" height="1001" alt="Virtuvėlė su plytų sienele ir laiptais į antresolę" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item" data-cat="viduje">
         <a href="assets/img/pusryciai-lovoje.jpg" data-lightbox data-caption="Pusryčiai lovoje ant medinio padėkliuko">
-          <img src="assets/img/pusryciai-lovoje.jpg" alt="Pusryčiai lovoje ant medinio padėkliuko" width="1000" height="1500" loading="lazy" decoding="async">
+          <img src="assets/img/sm/pusryciai-lovoje.jpg" srcset="assets/img/sm/pusryciai-lovoje.jpg 800w, assets/img/pusryciai-lovoje.jpg 1000w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1000" height="1500" alt="Pusryčiai lovoje ant medinio padėkliuko" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item" data-cat="lauke">
         <a href="assets/img/kupolas-nakti.jpg" data-lightbox data-caption="Namelis naktį su girliandomis tarp medžių">
-          <img src="assets/img/kupolas-nakti.jpg" alt="Namelis naktį su girliandomis tarp medžių" width="2000" height="1333" loading="lazy" decoding="async">
+          <img src="assets/img/sm/kupolas-nakti.jpg" srcset="assets/img/sm/kupolas-nakti.jpg 800w, assets/img/kupolas-nakti.jpg 2000w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="2000" height="1333" alt="Namelis naktį su girliandomis tarp medžių" loading="lazy" decoding="async">
           <span class="g-tag">Lauke</span>
         </a>
       </figure>
       <figure class="g-item" data-cat="viduje">
         <a href="assets/img/valgomasis.jpg" data-lightbox data-caption="Valgomojo stalas po pintais šviestuvais">
-          <img src="assets/img/valgomasis.jpg" alt="Valgomojo stalas po pintais šviestuvais" width="997" height="1500" loading="lazy" decoding="async">
+          <img src="assets/img/sm/valgomasis.jpg" srcset="assets/img/sm/valgomasis.jpg 800w, assets/img/valgomasis.jpg 997w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="997" height="1500" alt="Valgomojo stalas po pintais šviestuvais" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item" data-cat="ziema">
         <a href="assets/img/ofuro-ziema.jpg" data-lightbox data-caption="Ofūro vonia terasoje žiemą">
-          <img src="assets/img/ofuro-ziema.jpg" alt="Ofūro vonia terasoje žiemą" width="1500" height="1125" loading="lazy" decoding="async">
+          <img src="assets/img/sm/ofuro-ziema.jpg" srcset="assets/img/sm/ofuro-ziema.jpg 800w, assets/img/ofuro-ziema.jpg 1500w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1500" height="1125" alt="Ofūro vonia terasoje žiemą" loading="lazy" decoding="async">
           <span class="g-tag">Žiemą</span>
         </a>
       </figure>
       <figure class="g-item" data-cat="viduje">
         <a href="assets/img/vaikas-skaito.jpg" data-lightbox data-caption="Vaikas skaito knygelę ant lovos">
-          <img src="assets/img/vaikas-skaito.jpg" alt="Vaikas skaito knygelę ant lovos" width="1500" height="1000" loading="lazy" decoding="async">
+          <img src="assets/img/sm/vaikas-skaito.jpg" srcset="assets/img/sm/vaikas-skaito.jpg 800w, assets/img/vaikas-skaito.jpg 1500w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1500" height="1000" alt="Vaikas skaito knygelę ant lovos" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="viduje">
         <a href="assets/img/kavos-kampelis.jpg" data-lightbox data-caption="Kavos kampelis su Dolce Gusto aparatu">
-          <img src="assets/img/kavos-kampelis.jpg" alt="Kavos kampelis su Dolce Gusto aparatu" width="1500" height="1001" loading="lazy" decoding="async">
+          <img src="assets/img/sm/kavos-kampelis.jpg" srcset="assets/img/sm/kavos-kampelis.jpg 800w, assets/img/kavos-kampelis.jpg 1500w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1500" height="1001" alt="Kavos kampelis su Dolce Gusto aparatu" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="ziema">
         <a href="assets/img/terasa-ziema.jpg" data-lightbox data-caption="Apsnigta terasa su vaizdu į slėnį">
-          <img src="assets/img/terasa-ziema.jpg" alt="Apsnigta terasa su vaizdu į slėnį" width="2000" height="1335" loading="lazy" decoding="async">
+          <img src="assets/img/sm/terasa-ziema.jpg" srcset="assets/img/sm/terasa-ziema.jpg 800w, assets/img/terasa-ziema.jpg 2000w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="2000" height="1335" alt="Apsnigta terasa su vaizdu į slėnį" loading="lazy" decoding="async">
           <span class="g-tag">Žiemą</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="viduje">
         <a href="assets/img/miegamasis-langas.jpg" data-lightbox data-caption="Miegamojo langas ir kambariniai augalai">
-          <img src="assets/img/miegamasis-langas.jpg" alt="Miegamojo langas ir kambariniai augalai" width="1500" height="1000" loading="lazy" decoding="async">
+          <img src="assets/img/sm/miegamasis-langas.jpg" srcset="assets/img/sm/miegamasis-langas.jpg 800w, assets/img/miegamasis-langas.jpg 1500w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1500" height="1000" alt="Miegamojo langas ir kambariniai augalai" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="viduje">
         <a href="assets/img/vonios-kambarys.jpg" data-lightbox data-caption="Vonios kambarys su chalatais ir rankšluosčiais">
-          <img src="assets/img/vonios-kambarys.jpg" alt="Vonios kambarys su chalatais ir rankšluosčiais" width="1001" height="1500" loading="lazy" decoding="async">
+          <img src="assets/img/sm/vonios-kambarys.jpg" srcset="assets/img/sm/vonios-kambarys.jpg 800w, assets/img/vonios-kambarys.jpg 1001w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1001" height="1500" alt="Vonios kambarys su chalatais ir rankšluosčiais" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="lauke">
         <a href="assets/img/kupolas-is-virsaus.jpg" data-lightbox data-caption="Namelis iš paukščio skrydžio miško apsuptyje">
-          <img src="assets/img/kupolas-is-virsaus.jpg" alt="Namelis iš paukščio skrydžio miško apsuptyje" width="1182" height="665" loading="lazy" decoding="async">
+          <img src="assets/img/sm/kupolas-is-virsaus.jpg" srcset="assets/img/sm/kupolas-is-virsaus.jpg 800w, assets/img/kupolas-is-virsaus.jpg 1182w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1182" height="665" alt="Namelis iš paukščio skrydžio miško apsuptyje" loading="lazy" decoding="async">
           <span class="g-tag">Lauke</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="viduje">
         <a href="assets/img/antresole-lova.jpg" data-lightbox data-caption="Antresolės miegamoji vieta po kupolu">
-          <img src="assets/img/antresole-lova.jpg" alt="Antresolės miegamoji vieta po kupolu" width="1500" height="1001" loading="lazy" decoding="async">
+          <img src="assets/img/sm/antresole-lova.jpg" srcset="assets/img/sm/antresole-lova.jpg 800w, assets/img/antresole-lova.jpg 1500w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1500" height="1001" alt="Antresolės miegamoji vieta po kupolu" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="viduje">
         <a href="assets/img/biblioteka.jpg" data-lightbox data-caption="Mini biblioteka namelyje">
-          <img src="assets/img/biblioteka.jpg" alt="Mini biblioteka namelyje" width="1000" height="1500" loading="lazy" decoding="async">
+          <img src="assets/img/sm/biblioteka.jpg" srcset="assets/img/sm/biblioteka.jpg 800w, assets/img/biblioteka.jpg 1000w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1000" height="1500" alt="Mini biblioteka namelyje" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="ziema">
         <a href="assets/img/terasa-ziema-2.jpg" data-lightbox data-caption="Terasa žiemą su eglutėmis">
-          <img src="assets/img/terasa-ziema-2.jpg" alt="Terasa žiemą su eglutėmis" width="1500" height="1001" loading="lazy" decoding="async">
+          <img src="assets/img/sm/terasa-ziema-2.jpg" srcset="assets/img/sm/terasa-ziema-2.jpg 800w, assets/img/terasa-ziema-2.jpg 1500w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1500" height="1001" alt="Terasa žiemą su eglutėmis" loading="lazy" decoding="async">
           <span class="g-tag">Žiemą</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="viduje">
         <a href="assets/img/lekstes.jpg" data-lightbox data-caption="Keraminiai indai virtuvėlėje">
-          <img src="assets/img/lekstes.jpg" alt="Keraminiai indai virtuvėlėje" width="1500" height="1001" loading="lazy" decoding="async">
+          <img src="assets/img/sm/lekstes.jpg" srcset="assets/img/sm/lekstes.jpg 800w, assets/img/lekstes.jpg 1500w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1500" height="1001" alt="Keraminiai indai virtuvėlėje" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="viduje">
         <a href="assets/img/valgomasis-augalas.jpg" data-lightbox data-caption="Valgomojo kampelis su augalu">
-          <img src="assets/img/valgomasis-augalas.jpg" alt="Valgomojo kampelis su augalu" width="1000" height="1500" loading="lazy" decoding="async">
+          <img src="assets/img/sm/valgomasis-augalas.jpg" srcset="assets/img/sm/valgomasis-augalas.jpg 800w, assets/img/valgomasis-augalas.jpg 1000w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1000" height="1500" alt="Valgomojo kampelis su augalu" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="viduje">
         <a href="assets/img/rankslosciai.jpg" data-lightbox data-caption="Rankšluosčiai pintame krepšyje">
-          <img src="assets/img/rankslosciai.jpg" alt="Rankšluosčiai pintame krepšyje" width="1500" height="1001" loading="lazy" decoding="async">
+          <img src="assets/img/sm/rankslosciai.jpg" srcset="assets/img/sm/rankslosciai.jpg 800w, assets/img/rankslosciai.jpg 1500w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1500" height="1001" alt="Rankšluosčiai pintame krepšyje" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="viduje">
         <a href="assets/img/antresole-sviestuvas.jpg" data-lightbox data-caption="Jauki antresolės lempa">
-          <img src="assets/img/antresole-sviestuvas.jpg" alt="Jauki antresolės lempa" width="1125" height="1500" loading="lazy" decoding="async">
+          <img src="assets/img/sm/antresole-sviestuvas.jpg" srcset="assets/img/sm/antresole-sviestuvas.jpg 800w, assets/img/antresole-sviestuvas.jpg 1125w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1125" height="1500" alt="Jauki antresolės lempa" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="ziema">
         <a href="assets/img/langas-pledas.jpg" data-lightbox data-caption="Pledas ir knyga prie lango žiemą">
-          <img src="assets/img/langas-pledas.jpg" alt="Pledas ir knyga prie lango žiemą" width="1125" height="1500" loading="lazy" decoding="async">
+          <img src="assets/img/sm/langas-pledas.jpg" srcset="assets/img/sm/langas-pledas.jpg 800w, assets/img/langas-pledas.jpg 1125w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1125" height="1500" alt="Pledas ir knyga prie lango žiemą" loading="lazy" decoding="async">
           <span class="g-tag">Žiemą</span>
         </a>
       </figure>
       <figure class="g-item is-extra" data-cat="viduje">
         <a href="assets/img/virtuve-stalas.jpg" data-lightbox data-caption="Šviesi virtuvėlė ir valgomojo stalas">
-          <img src="assets/img/virtuve-stalas.jpg" alt="Šviesi virtuvėlė ir valgomojo stalas" width="1500" height="1001" loading="lazy" decoding="async">
+          <img src="assets/img/sm/virtuve-stalas.jpg" srcset="assets/img/sm/virtuve-stalas.jpg 800w, assets/img/virtuve-stalas.jpg 1500w" sizes="(max-width: 767px) 50vw, (max-width: 1100px) 50vw, 420px" width="1500" height="1001" alt="Šviesi virtuvėlė ir valgomojo stalas" loading="lazy" decoding="async">
           <span class="g-tag">Viduje</span>
         </a>
       </figure>
         </div>
 
         <div class="gallery__more">
-          <button type="button" class="btn btn--outline" data-gallery-more>Rodyti visas nuotraukas</button>
+          <button type="button" class="btn btn--outline" data-gallery-more>Rodyti visas nuotraukas (26)</button>
         </div>
       </div>
     </section>
@@ -444,7 +456,7 @@
         <p class="ofuro__text reveal">Vonia paprasta naudotis. Vanduo prileidžiamas tinkamos temperatūros – papildomai šildyti nereikia.</p>
         <div class="ofuro__row reveal">
           <span class="ofuro__price">45 €</span>
-          <button type="button" class="btn btn--light" data-add-extra="ofuro">Pridėti prie užklausos</button>
+          <button type="button" class="btn btn--light" data-add-extra="ofuro" aria-pressed="false">Pridėti prie užklausos</button>
         </div>
       </div>
     </section>
@@ -459,13 +471,13 @@
             <p class="eyebrow reveal">Ką nuveikti?</p>
             <h2 class="h2 split" data-split>Pramogos vietoje ir prie Dubysos</h2>
           </div>
-          <p class="reveal">Dalis pramogų nemokamos, kitas užsisakykite iš anksto. Norėdami sužinoti daugiau, susisiekite su mumis asmeniškai.</p>
+          <p class="reveal">Kai kurios pramogos nemokamos, mokamas pridėkite prie užklausos arba užsisakykite atvykę. Norėdami sužinoti daugiau, susisiekite su mumis.</p>
         </div>
       </div>
 
       <div class="panels" data-panels>
         <article class="panel is-open" tabindex="0">
-          <img src="assets/img/biblioteka.jpg" alt="Knygų lentyna namelyje" loading="lazy">
+          <img src="assets/img/sm/biblioteka.jpg" srcset="assets/img/sm/biblioteka.jpg 800w, assets/img/biblioteka.jpg 1000w" sizes="(max-width: 899px) 80vw, 46vw" width="1000" height="1500" alt="Knygų lentyna namelyje" loading="lazy">
           <div class="panel__body">
             <span class="panel__price">Nemokama</span>
             <h3>Mini biblioteka ir stalo žaidimai</h3>
@@ -473,39 +485,43 @@
           </div>
         </article>
         <article class="panel" tabindex="0">
-          <img src="assets/img/ofuro-ziema.jpg" alt="Ofūro vonia terasoje žiemą" loading="lazy">
+          <img src="assets/img/sm/ofuro-ziema.jpg" srcset="assets/img/sm/ofuro-ziema.jpg 800w, assets/img/ofuro-ziema.jpg 1500w" sizes="(max-width: 899px) 80vw, 46vw" width="1500" height="1125" alt="Ofūro vonia terasoje žiemą" loading="lazy">
           <div class="panel__body">
             <span class="panel__price">45 €</span>
             <h3>Ofūro vonia</h3>
             <p>Vanduo prileidžiamas 41 °C temperatūros – papildomai šildyti nereikia.</p>
+            <button type="button" class="btn btn--chip panel__add" data-add-extra="ofuro" aria-pressed="false">Pridėti prie užklausos</button>
           </div>
         </article>
         <article class="panel" tabindex="0">
-          <img src="assets/img/pexels-pirtis.jpg" alt="Medinės pirties vidus" loading="lazy">
+          <img src="assets/img/sm/pexels-pirtis.jpg" srcset="assets/img/sm/pexels-pirtis.jpg 800w, assets/img/pexels-pirtis.jpg 1400w" sizes="(max-width: 899px) 80vw, 46vw" width="1400" height="934" alt="Medinės pirties vidus" loading="lazy">
           <div class="panel__body">
             <span class="panel__price">50 € / 2 val.</span>
             <h3>Mobili pirtis</h3>
             <p>Kepurės pirčiai ir chalatai jau laukia namelyje.</p>
+            <button type="button" class="btn btn--chip panel__add" data-add-extra="pirtis" aria-pressed="false">Pridėti prie užklausos</button>
           </div>
         </article>
         <article class="panel" tabindex="0">
-          <img src="assets/img/pexels-baidares.jpg" alt="Baidarininkas ramia miško upe" loading="lazy">
+          <img src="assets/img/sm/pexels-baidares.jpg" srcset="assets/img/sm/pexels-baidares.jpg 800w, assets/img/pexels-baidares.jpg 1400w" sizes="(max-width: 899px) 80vw, 46vw" width="1400" height="934" alt="Baidarininkas ramia miško upe" loading="lazy">
           <div class="panel__body">
             <span class="panel__price">nuo 35 €</span>
             <h3>Plaukimas baidarėmis</h3>
             <p>Dubysa – viena gražiausių Lietuvos upių, ramus maršrutas tiesiai pro slėnį.</p>
+            <button type="button" class="btn btn--chip panel__add" data-add-extra="baidares" aria-pressed="false">Pridėti prie užklausos</button>
           </div>
         </article>
         <article class="panel" tabindex="0">
-          <img src="assets/img/pexels-lankai.jpg" alt="Šaudymas iš lanko pievoje" loading="lazy">
+          <img src="assets/img/sm/pexels-lankai.jpg" srcset="assets/img/sm/pexels-lankai.jpg 800w, assets/img/pexels-lankai.jpg 1400w" sizes="(max-width: 899px) 80vw, 46vw" width="1400" height="935" alt="Šaudymas iš lanko pievoje" loading="lazy">
           <div class="panel__body">
             <span class="panel__price">40 € / 1,5 val.</span>
             <h3>Šaudymas lanku ar pneumatiniu ginklu</h3>
             <p>Taiklumo pamoka gamtoje draugams ar šeimai.</p>
+            <button type="button" class="btn btn--chip panel__add" data-add-extra="lankai" aria-pressed="false">Pridėti prie užklausos</button>
           </div>
         </article>
         <article class="panel" tabindex="0">
-          <img src="assets/img/pexels-aikstele.jpg" alt="Medinė žaidimų aikštelė miške" loading="lazy">
+          <img src="assets/img/sm/pexels-aikstele.jpg" srcset="assets/img/sm/pexels-aikstele.jpg 800w, assets/img/pexels-aikstele.jpg 1050w" sizes="(max-width: 899px) 80vw, 46vw" width="1050" height="1400" alt="Medinė žaidimų aikštelė miške" loading="lazy">
           <div class="panel__body">
             <span class="panel__price">Nemokama</span>
             <h3>Sporto ir vaikų žaidimo aikštelės</h3>
@@ -566,7 +582,7 @@
 
           <div class="booker__row">
             <div class="booker__field">
-              <span class="booker__label">Svečių skaičius</span>
+              <span class="booker__label">Svečių skaičius (iki 4)</span>
               <div class="stepper" data-stepper>
                 <button type="button" data-step="-1" aria-label="Mažiau svečių">−</button>
                 <output data-guests aria-live="polite">2</output>
@@ -576,6 +592,7 @@
             <div class="booker__field booker__dates">
               <span class="booker__label">Datos</span>
               <span data-range-label>Pažymėkite atvykimo ir išvykimo dienas</span>
+              <button type="button" class="booker__clear" data-cal-clear hidden>Išvalyti</button>
             </div>
           </div>
 
@@ -598,7 +615,7 @@
           </div>
 
           <button type="button" class="btn btn--clay btn--block" data-to-form disabled>Siųsti užklausą šioms datoms</button>
-          <p class="booker__hint">Užimtumą patvirtinsime atsakydami į užklausą.</p>
+          <p class="booker__hint" data-booker-hint>Pirmiausia kalendoriuje pažymėkite atvykimo ir išvykimo dienas.</p>
         </div>
       </div>
     </section>
@@ -621,6 +638,10 @@
             <li class="reveal"><span>El. paštas</span><a href="mailto:kupolinisnamelis@gmail.com">kupolinisnamelis@gmail.com</a></li>
           </ul>
 
+          <a class="map-link reveal" href="https://www.google.com/maps/dir/?api=1&amp;destination=Baravai%2C+Kauno+rajonas" target="_blank" rel="noopener">
+            Kaip atvykti – maršrutas „Google Maps“
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3h7v7M13 3 4 12"/></svg>
+          </a>
           <div class="map reveal">
             <iframe title="Kupolinio namelio vieta žemėlapyje" src="https://www.google.com/maps?q=Baravai,+Kauno+rajonas&z=12&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
@@ -629,13 +650,34 @@
         <form class="form reveal" data-demo-form novalidate>
           <h3>Parašykite mums</h3>
           <div class="form__row">
-            <label class="field"><span>Jūsų vardas</span><input type="text" name="vardas" autocomplete="name" required></label>
-            <label class="field"><span>El. paštas</span><input type="email" name="email" autocomplete="email" required></label>
+            <div class="field">
+              <label for="f-vardas"><span>Jūsų vardas *</span></label>
+              <input id="f-vardas" type="text" name="vardas" autocomplete="name" required aria-describedby="e-vardas">
+              <span class="field__error" id="e-vardas" aria-live="polite"></span>
+            </div>
+            <div class="field">
+              <label for="f-email"><span>El. paštas *</span></label>
+              <input id="f-email" type="email" name="email" autocomplete="email" inputmode="email" required aria-describedby="e-email">
+              <span class="field__error" id="e-email" aria-live="polite"></span>
+            </div>
           </div>
-          <label class="field"><span>Tema</span><input type="text" name="tema" data-form-subject></label>
-          <label class="field"><span>Jūsų žinutė</span><textarea name="zinute" rows="6" data-form-message></textarea></label>
-          <button type="submit" class="btn btn--clay">Pateikti</button>
-          <p class="form__thanks" data-form-thanks hidden>Ačiū, jog parašėte! Demo versijoje žinutė neišsiunčiama.</p>
+          <div class="form__row">
+            <div class="field">
+              <label for="f-tel"><span>Telefonas <span class="field__opt">(neprivaloma)</span></span></label>
+              <input id="f-tel" type="tel" name="telefonas" autocomplete="tel" inputmode="tel">
+            </div>
+            <div class="field">
+              <label for="f-tema"><span>Tema</span></label>
+              <input id="f-tema" type="text" name="tema" data-form-subject>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-zinute"><span>Jūsų žinutė</span></label>
+            <textarea id="f-zinute" name="zinute" rows="6" data-form-message placeholder="Pvz., norimos datos, svečių skaičius, klausimai apie pramogas"></textarea>
+          </div>
+          <button type="submit" class="btn btn--clay">Siųsti žinutę</button>
+          <p class="form__consent">Jūsų duomenis naudosime tik atsakymui pateikti. Plačiau – <a href="privatumo-politika.html">privatumo politikoje</a>.</p>
+          <p class="form__thanks" data-form-thanks tabindex="-1" hidden>Ačiū, jog parašėte! Atsakysime kuo greičiau. (Demo versijoje žinutė neišsiunčiama.)</p>
         </form>
       </div>
     </section>
@@ -693,8 +735,14 @@
     <a class="btn btn--clay btn--sm" href="index.html#kainos">Rezervuoti</a>
   </div>
 
+  <!-- Pranešimas apie pridėtą pramogą -->
+  <div class="toast" data-toast role="status" aria-live="polite">
+    <span data-toast-text></span>
+    <button type="button" data-toast-action>Peržiūrėti kainą</button>
+  </div>
+
   <!-- Lightbox (Salient: Theme Options → Lightbox „Fancybox“) -->
-  <div class="lightbox" data-lightbox-root hidden>
+  <div class="lightbox" data-lightbox-root role="dialog" aria-modal="true" aria-label="Nuotraukų peržiūra" hidden>
     <button class="lightbox__close" type="button" aria-label="Uždaryti" data-lb-close>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
     </button>
@@ -711,6 +759,6 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
-  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/main.js?v=541ac47c" defer></script>
 </body>
 </html>
